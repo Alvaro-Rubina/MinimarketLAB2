@@ -19,19 +19,23 @@ public class Minimarket {
     // Metodos ------------------------
     private void agregarProducto(){
         System.out.println("** ID del producto: ");
-        int idProducto = scan.nextInt();
+        int idProducto = 0;
+        idProducto = (int) this.verificarIngresoValorNumerico(idProducto);
 
         System.out.print("\n** Nombre: ");
+        scan.next();
         String nombre = scan.nextLine();
 
         System.out.print("** Marca: ");
         String marca = scan.nextLine();
 
         System.out.print("** Precio: ");
-        double precio = scan.nextDouble();
+        double precio = 0;
+        precio = this.verificarIngresoValorNumerico(precio);
 
         System.out.print("** Stock: ");
-        int stock = scan.nextInt();
+        int stock = 0;
+        stock = (int) this.verificarIngresoValorNumerico(stock);
 
         listaProductos.add(new Producto(nombre, marca, precio, stock, idProducto));
     };
@@ -39,21 +43,26 @@ public class Minimarket {
 
     private void agregarBebida(){
         System.out.println("** ID del producto: ");
-        int idProducto = scan.nextInt();
+        int idProducto = 0;
+        idProducto = (int) this.verificarIngresoValorNumerico(idProducto);
 
         System.out.print("\n** Nombre: ");
+        scan.next();
         String nombre = scan.nextLine();
 
         System.out.print("** Marca: ");
         String marca = scan.nextLine();
 
         System.out.print("** Precio: ");
-        double precio = scan.nextDouble();
+        double precio = 0;
+        precio = this.verificarIngresoValorNumerico(precio);
 
         System.out.print("** Stock: ");
-        int stock = scan.nextInt();
+        int stock = 0;
+        stock = (int) this.verificarIngresoValorNumerico(stock);
 
         System.out.print("** Sabor: ");
+        scan.next();
         String sabor = scan.nextLine();
 
         boolean contieneAlcoohol = false;
@@ -75,19 +84,23 @@ public class Minimarket {
 
     private void agregarGolosina(){
         System.out.println("** ID del producto: ");
-        int idProducto = scan.nextInt();
+        int idProducto = 0;
+        idProducto = (int) this.verificarIngresoValorNumerico(idProducto);
 
         System.out.print("\n** Nombre: ");
+        scan.next();
         String nombre = scan.nextLine();
 
         System.out.print("** Marca: ");
         String marca = scan.nextLine();
 
         System.out.print("** Precio: ");
-        double precio = scan.nextDouble();
+        double precio = 0;
+        precio = this.verificarIngresoValorNumerico(precio);
 
         System.out.print("** Stock: ");
-        int stock = scan.nextInt();
+        int stock = 0;
+        stock = (int) this.verificarIngresoValorNumerico(stock);
 
         System.out.print("** Tipo de golosina: ");
         String tipoGolosina = scan.nextLine();
@@ -111,39 +124,26 @@ public class Minimarket {
 
     }
 
-    private void venderProducto(int id){
-        for (Producto productoN: listaProductos){
-            if (productoN.getIdProducto() == id){
-                System.out.print("Cuantas unidades de " + productoN.getNombre() + " desea vender?: ");
-                int cantidadVender = 0;
-                cantidadVender = (int) this.verificarIngresoValorNumerico(cantidadVender);
-
-                productoN.setStock(productoN.getStock() - cantidadVender);
-                System.out.println("Se han vendido " + cantidadVender + " unidades del producto " + productoN.getNombre());
-                System.out.println("Stock restante: " + productoN.getStock());
-            }else {
-                System.out.println("No se encuentra registrado un producto con el ID dada.");
-            }
-        }
-
-    }
-
     private void agregarComida(){
 
         System.out.println("** ID del producto: ");
-        int idProducto = scan.nextInt();
+        int idProducto = 0;
+        idProducto = (int) this.verificarIngresoValorNumerico(idProducto);
 
         System.out.print("\n** Nombre: ");
+        scan.next();
         String nombre = scan.nextLine();
 
         System.out.print("** Marca: ");
         String marca = scan.nextLine();
 
         System.out.print("** Precio: ");
-        double precio = scan.nextDouble();
+        double precio = 0;
+        precio = this.verificarIngresoValorNumerico(precio);
 
         System.out.print("** Stock: ");
-        int stock = scan.nextInt();
+        int stock = 0;
+        stock = (int) this.verificarIngresoValorNumerico(stock);
 
         boolean aptaCeliacos = false;
         System.out.print("** Es apta para celíacos? Ingrese SI o NO: ");
@@ -162,6 +162,23 @@ public class Minimarket {
 
         listaProductos.add(new Comida(nombre, marca, precio, stock, aptaCeliacos, vegetariana, fechaVencimiento,
                 ingredientes, idProducto));
+    }
+
+    private void venderProducto(int id){
+        for (Producto productoN: listaProductos){
+            if (productoN.getIdProducto() == id){
+                System.out.print("Cuantas unidades de " + productoN.getNombre() + " desea vender?: ");
+                int cantidadVender = 0;
+                cantidadVender = (int) this.verificarIngresoValorNumerico(cantidadVender);
+
+                productoN.setStock(productoN.getStock() - cantidadVender);
+                System.out.println("Se han vendido " + cantidadVender + " unidades del producto " + productoN.getNombre());
+                System.out.println("Stock restante: " + productoN.getStock());
+            }else {
+                System.out.println("No se encuentra registrado un producto con el ID dada.");
+            }
+        }
+
     }
 
     // Menu de selección
@@ -242,7 +259,16 @@ public class Minimarket {
                     System.out.println("La opcion que ha ingresado no está contemplada, intente nuevamente.");
                     continue;
             }
-            break;
+            System.out.print("\nDesea realizar otra operación? Ingrese SI o NO: ");
+            boolean continuar = false;
+            continuar = this.verificacionBooleano(continuar);
+            scan.next();
+
+            if (continuar){
+                this.menuDeSeleccion();
+            } else{
+                break;
+            }
         }
     }
     private double verificarIngresoValorNumerico(double eleccion){
