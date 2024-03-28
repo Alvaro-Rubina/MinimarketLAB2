@@ -99,7 +99,7 @@ public class Minimarket {
         int cantidadPorUnidad = 0;
         cantidadPorUnidad= (int) this.verificarIngresoValorNumerico(cantidadPorUnidad);
 
-        System.out.println("** Fecha de vencimiento (YYYY/MM/DD): ");
+        System.out.println("** Fecha de vencimiento (YYYY-MM-DD): ");
         LocalDate fechaVencimiento = LocalDate.parse(scan.nextLine());
 
         boolean contieneTaac = false;
@@ -146,7 +146,7 @@ public class Minimarket {
         System.out.print("** Es apta para vegetarianos? Ingrese SI o NO: ");
         vegetariana = this.verificacionBooleano(vegetariana);
 
-        System.out.println("** Fecha de vencimiento (YYYY/MM/DD): ");
+        System.out.println("** Fecha de vencimiento (YYYY-MM-DD): ");
         LocalDate fechaVencimiento = LocalDate.parse(scan.nextLine());
 
         System.out.println("** Ingredientes (Para terminar digite TERMINAR): ");
@@ -190,14 +190,19 @@ public class Minimarket {
                         case 1:
                             this.agregarComida();
                             System.out.println("Comida agregada correctamente.");
+                            break;
                         case 2:
                             this.agregarBebida();
                             System.out.println("Bebida agregada correctamene.");
+                            break;
                         case 3:
                             agregarGolosina();
                             System.out.println("Golosina agregada correctamente");
+                            break;
                         case 4:
                             agregarProducto();
+                            System.out.println("Producto agregado correctamente");
+                            break;
                         case 5:
                             break;
                     }
