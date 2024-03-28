@@ -17,23 +17,65 @@ public class Minimarket {
 
 
     // Metodos ------------------------
-    public String agregarProducto(Producto productoN){
-        listaProductos.add(productoN);
-        return "Producto agregado correctamente";
+    private void agregarProducto(){
+        System.out.println("** ID del producto: ");
+        int idProducto = scan.nextInt();
+
+        System.out.print("\n** Nombre: ");
+        String nombre = scan.nextLine();
+
+        System.out.print("** Marca: ");
+        String marca = scan.nextLine();
+
+        System.out.print("** Precio: ");
+        double precio = scan.nextDouble();
+
+        System.out.print("** Stock: ");
+        int stock = scan.nextInt();
     };
 
 
-    public String agregarBebida(Bebida bebidaN){
-        listaProductos.add(bebidaN);
-        return "Bebida agregada correctamente";
+    private void agregarBebida(){
+        System.out.println("** ID del producto: ");
+        int idProducto = scan.nextInt();
+
+        System.out.print("\n** Nombre: ");
+        String nombre = scan.nextLine();
+
+        System.out.print("** Marca: ");
+        String marca = scan.nextLine();
+
+        System.out.print("** Precio: ");
+        double precio = scan.nextDouble();
+
+        System.out.print("** Stock: ");
+        int stock = scan.nextInt();
+
+        System.out.print("** Sabor: ");
+        String sabor = scan.nextLine();
+
+        boolean contieneAlcoohol = false;
+        System.out.print("** Contiene alcoohol? Ingrese SI o NO: ");
+        contieneAlcoohol = this.verificacionBooleano(contieneAlcoohol);
+
+        System.out.print("** Cantidad de azucar: ");
+        double cantidadAzucar = 0;
+        cantidadAzucar = this.verificarIngresoValorNumerico(cantidadAzucar);
+
+        System.out.print("** Cantidad de bebida por envase (Ingrese el valor en mL): ");
+        double cantidadPorEnvase = 0;
+        cantidadPorEnvase = this.verificarIngresoValorNumerico(cantidadPorEnvase);
+
+
+        listaProductos.add(new Bebida(nombre, marca, precio, stock, sabor, contieneAlcoohol, cantidadAzucar,
+                cantidadPorEnvase, idProducto));
     }
 
-    public String agregarGolosina(Golosina golosinaN){
-        listaProductos.add(golosinaN);
-        return "Golosina agregada correctamente";
+    private void agregarGolosina(){
+
     }
 
-    public void comprarComida(int id){
+    private void comprarComida(int id){
         for (Producto comidaN: listaProductos){
             if (comidaN.getIdProducto() == id){
                 comidaN.setStock(comidaN.getStock() - 1);
@@ -43,7 +85,7 @@ public class Minimarket {
 
     }
 
-    public void agregarComida(){
+    private void agregarComida(){
 
         System.out.println("** ID del producto: ");
         int idProducto = scan.nextInt();
@@ -62,11 +104,11 @@ public class Minimarket {
 
         boolean aptaCeliacos = false;
         System.out.print("** Es apta para celíacos? Ingrese SI o NO: ");
-        aptaCeliacos = this.comidaAptaCeliacosOrVegetariana(aptaCeliacos);
+        aptaCeliacos = this.verificacionBooleano(aptaCeliacos);
 
         boolean vegetariana = false;
         System.out.print("** Es apta para vegetarianos? Ingrese SI o NO: ");
-        vegetariana = this.comidaAptaCeliacosOrVegetariana(vegetariana);
+        vegetariana = this.verificacionBooleano(vegetariana);
 
         System.out.println("** Fecha de vencimiento (YYYY/MM/DD): ");
         LocalDate fechaVencimiento = LocalDate.parse(scan.nextLine());
@@ -97,7 +139,7 @@ public class Minimarket {
 
         // lógica
         while (true) {
-            eleccion = this.ingresoEleccion(eleccion);
+            eleccion = (int) this.verificarIngresoValorNumerico(eleccion);
             switch (eleccion) {
                 case 1:
                     //TODO: Implementacion logica para vender un producto
@@ -107,12 +149,14 @@ public class Minimarket {
                     System.out.println("\nQué producto desea ingresar?");
                     System.out.println("1- Comida \n2- Bebida \n3- Golosina \n4- Otros \n5- Salir");
                     int eleccionProducto = 0;
-                    eleccionProducto = this.ingresoEleccion(eleccionProducto);
+                    eleccionProducto = (int) this.verificarIngresoValorNumerico(eleccionProducto);
                     switch (eleccionProducto){
                         case 1:
                             this.agregarComida();
+                            System.out.println("Comida agregada correctamente.");
                         case 2:
-                            this.agregarBebida():
+                            this.agregarBebida();
+                            System.out.println("Bebida agregada correctamene.");
                         case 3:
                             agregarGolosina();
                         case 4:
@@ -120,7 +164,6 @@ public class Minimarket {
                         case 5:
                             break;
                     }
-
                     break;
                 case 3:
                     //TODO: Implementacion logica para pagar al proveedor
@@ -150,21 +193,21 @@ public class Minimarket {
             break;
         }
     }
-    public int ingresoEleccion(int eleccion){
+    private double verificarIngresoValorNumerico(double eleccion){
 
         while (true){
-            System.out.print("\nIngrese su elección: ");
+            System.out.print("\nIngrese el número: ");
             try {
-                eleccion = scan.nextInt();
+                eleccion = scan.nextDouble();
                 break;
             }catch (Exception e){
-                System.out.println("Se ha ingresado un carácter inválido. Intente nuevamente.");
+                System.out.println("Se ha ingresado un carácter numérico inválido. Intente nuevamente.");
                 scan.next();
             }
         }
         return eleccion;
     }
-    public boolean comidaAptaCeliacosOrVegetariana(boolean variableBooleana){
+    private boolean verificacionBooleano(boolean variableBooleana){
         while (true) {
             String eleccion = scan.nextLine().toUpperCase();
             if ((eleccion.equalsIgnoreCase("SI")) || (eleccion.equalsIgnoreCase("NO"))){
@@ -184,7 +227,7 @@ public class Minimarket {
         return variableBooleana;
     }
 
-    public ArrayList<String> ingresoIngredientes(){
+    private ArrayList<String> ingresoIngredientes(){
         ArrayList<String> ingredientes = new ArrayList<String>();
         while (true){
             String ingrediente = scan.nextLine();
