@@ -32,6 +32,8 @@ public class Minimarket {
 
         System.out.print("** Stock: ");
         int stock = scan.nextInt();
+
+        listaProductos.add(new Producto(nombre, marca, precio, stock, idProducto));
     };
 
 
