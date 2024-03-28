@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.clases.Minimarket;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +8,7 @@ public class Main {
         // Instancia del minimarket
         Minimarket minimarket = new Minimarket();
 
-        // Menu
+        // Menu de seleccion
         System.out.println("-- MINIMARKET --");
         minimarket.menuDeSeleccion();
 
