@@ -19,7 +19,8 @@ public class Bebida extends Producto{
         this.cantidadPorEnvase = cantidadPorEnvase;
     }
 
-    public Bebida(String nombre, String marca, double precio, int stock, String sabor, boolean contieneAlcohol, double cantidadAzucar, double cantidadPorEnvase, int idProducto) {
+    public Bebida(String nombre, String marca, double precio, int stock, String sabor, boolean contieneAlcohol,
+                  double cantidadAzucar, double cantidadPorEnvase, int idProducto) {
         super(nombre, marca, precio, stock, idProducto);
         this.sabor = sabor;
         this.contieneAlcohol = contieneAlcohol;
