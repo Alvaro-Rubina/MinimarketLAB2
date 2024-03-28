@@ -23,7 +23,8 @@ public class Golosina extends Producto{
         this.contieneTaac = contieneTaac;
     }
 
-    public Golosina(String nombre, String marca, double precio, int stock, String tipoGolosina, String sabor, int cantidadPorUnidad, LocalDate fechaVencimiento, boolean contieneTaac, int idProducto) {
+    public Golosina(String nombre, String marca, double precio, int stock, String tipoGolosina, String sabor,
+                    int cantidadPorUnidad, LocalDate fechaVencimiento, boolean contieneTaac, int idProducto) {
         super(nombre, marca, precio, stock, idProducto);
         this.tipoGolosina = tipoGolosina;
         this.sabor = sabor;
