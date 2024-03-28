@@ -72,6 +72,40 @@ public class Minimarket {
     }
 
     private void agregarGolosina(){
+        System.out.println("** ID del producto: ");
+        int idProducto = scan.nextInt();
+
+        System.out.print("\n** Nombre: ");
+        String nombre = scan.nextLine();
+
+        System.out.print("** Marca: ");
+        String marca = scan.nextLine();
+
+        System.out.print("** Precio: ");
+        double precio = scan.nextDouble();
+
+        System.out.print("** Stock: ");
+        int stock = scan.nextInt();
+
+        System.out.print("** Tipo de golosina: ");
+        String tipoGolosina = scan.nextLine();
+
+        System.out.print("** Sabor: ");
+        String sabor = scan.nextLine();
+
+        System.out.print("** Cantidad por unidad: ");
+        int cantidadPorUnidad = 0;
+        cantidadPorUnidad= (int) this.verificarIngresoValorNumerico(cantidadPorUnidad);
+
+        System.out.println("** Fecha de vencimiento (YYYY/MM/DD): ");
+        LocalDate fechaVencimiento = LocalDate.parse(scan.nextLine());
+
+        boolean contieneTaac = false;
+        System.out.print("** Contiene TAAC? Ingrese SI o NO");
+        contieneTaac = verificacionBooleano(contieneTaac);
+
+        listaProductos.add(new Golosina(nombre, marca, precio, stock, tipoGolosina, sabor, cantidadPorUnidad,
+                fechaVencimiento, contieneTaac, idProducto));
 
     }
 
@@ -159,6 +193,7 @@ public class Minimarket {
                             System.out.println("Bebida agregada correctamene.");
                         case 3:
                             agregarGolosina();
+                            System.out.println("Golosina agregada correctamente");
                         case 4:
                             agregarProducto();
                         case 5:
