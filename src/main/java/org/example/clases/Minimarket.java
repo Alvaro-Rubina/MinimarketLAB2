@@ -111,11 +111,18 @@ public class Minimarket {
 
     }
 
-    private void comprarComida(int id){
-        for (Producto comidaN: listaProductos){
-            if (comidaN.getIdProducto() == id){
-                comidaN.setStock(comidaN.getStock() - 1);
-                System.out.println("Comida vendida. Stock:  " + comidaN.getStock());
+    private void venderProducto(int id){
+        for (Producto productoN: listaProductos){
+            if (productoN.getIdProducto() == id){
+                System.out.print("Cuantas unidades de " + productoN.getNombre() + " desea vender?: ");
+                int cantidadVender = 0;
+                cantidadVender = (int) this.verificarIngresoValorNumerico(cantidadVender);
+
+                productoN.setStock(productoN.getStock() - cantidadVender);
+                System.out.println("Se han vendido " + cantidadVender + " unidades del producto " + productoN.getNombre());
+                System.out.println("Stock restante: " + productoN.getStock());
+            }else {
+                System.out.println("No se encuentra registrado un producto con el ID dada.");
             }
         }
 
@@ -162,7 +169,7 @@ public class Minimarket {
 
         int eleccion = 0;
 
-        System.out.println("\nSeleccione la opción que desee realizar:");
+        System.out.println("\nIngrese el numero correspondiente a la accion que desea realizar:");
         System.out.println("1- Vender un producto");
         System.out.println("2- Ingresar un producto");
         System.out.println("3- Pagar al proveedor");
@@ -178,12 +185,15 @@ public class Minimarket {
             eleccion = (int) this.verificarIngresoValorNumerico(eleccion);
             switch (eleccion) {
                 case 1:
-                    //TODO: Implementacion logica para vender un producto
+                    System.out.print("** Ingrese el ID del producto que desea vender: ");
+                    int id = 0;
+                    id = (int) this.verificarIngresoValorNumerico(id);
+                    this.venderProducto(id);
                     break;
                 case 2:
-
                     System.out.println("\nQué producto desea ingresar?");
                     System.out.println("1- Comida \n2- Bebida \n3- Golosina \n4- Otros \n5- Salir");
+
                     int eleccionProducto = 0;
                     eleccionProducto = (int) this.verificarIngresoValorNumerico(eleccionProducto);
                     switch (eleccionProducto){
@@ -238,7 +248,6 @@ public class Minimarket {
     private double verificarIngresoValorNumerico(double eleccion){
 
         while (true){
-            System.out.print("\nIngrese el número: ");
             try {
                 eleccion = scan.nextDouble();
                 break;
