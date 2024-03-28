@@ -8,7 +8,10 @@ public class Minimarket {
 
     // Atributos
     private Scanner scan = new Scanner(System.in);
-    private ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+    private ArrayList<Producto> listaProductos = new ArrayList<>();
+    private ArrayList<Empleado> listaEmpleados = new ArrayList<>();
+    private ArrayList<Proveedor> listaProveedores = new ArrayList<>();
+    private ArrayList<Cliente> listaClientes = new ArrayList<>();
 
     // Get
     public ArrayList<Producto> getListaProductos() {
