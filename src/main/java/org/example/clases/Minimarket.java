@@ -2,6 +2,8 @@ package org.example.clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Minimarket {
@@ -208,6 +210,8 @@ public class Minimarket {
                 this.cantidadVentas += 1;
                 this.ganancias += productoN.getPrecio();
                 this.balance += productoN.getPrecio();
+
+                productoN.setCantVecesVendido(productoN.getCantVecesVendido() + 1);
             }else {
                 System.out.println("No se encuentra registrado un producto con el ID dada.");
             }
@@ -230,6 +234,27 @@ public class Minimarket {
         }
     }
 
+    private void mostarProductosPopulares(){
+        // Ordenando los productos segun los mas vendidos
+        Collections.sort(listaProductos, new Comparator<Producto>() {
+            @Override
+            public int compare(Producto p1, Producto p2) {
+                return Integer.compare(p2.getCantVecesVendido(), p1.getCantVecesVendido());
+            }
+        });
+
+        // Imprimiendo los 3 productos más vendidos
+        int contador = 1;
+        for (Producto productoN: listaProductos){
+            if (contador <= 3){
+                System.out.println(contador + "- " + productoN.getNombre());
+                contador += 1;
+            }else {
+                break;
+            }
+        }
+    }
+
     // Menu de selección --------------------------------------------------
     public void menuDeSeleccion(){
 
@@ -243,7 +268,7 @@ public class Minimarket {
         System.out.println("5- Consultar balance de gastos/ganancias");
         System.out.println("6- Solicitar una comanda a la cocina (?)");
         System.out.println("7- Pagar cuenta");
-        System.out.println("8- Mostrar platos más pedidos");
+        System.out.println("8- Mostrar productos más pedidos");
         System.out.println("0- Salir");
 
         // lógica
@@ -295,13 +320,14 @@ public class Minimarket {
                     System.out.println("* BALANCE: " + this.balance);
                     break;
                 case 6:
-                    //TODO: Implementacion logica para solicitar comanda a la cocina ?????????
+                    //TODO: Implementacion logica para solicitar comanda a la cocina (?????????)
                     break;
                 case 7:
                     //TODO: Implementacion logica para pagar cuenta
                     break;
                 case 8:
-                    //TODO: Implementacion logica para mostrar platos mas pedidos
+                    System.out.println("Los 3 productos más pedidos son:");
+                    this.mostarProductosPopulares();
                     break;
                 case 0:
                     System.out.println("Saliendo...");
@@ -322,6 +348,8 @@ public class Minimarket {
             }
         }
     }
+    
+    // --------------------------------------------------------
     private double verificarIngresoValorNumerico(double eleccion){
 
         while (true){
