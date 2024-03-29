@@ -9,7 +9,6 @@ public class Main {
         Minimarket minimarket = new Minimarket();
 
         // Menu de seleccion
-        System.out.println("-- MINIMARKET --");
         minimarket.menuDeSeleccion();
 
     }
