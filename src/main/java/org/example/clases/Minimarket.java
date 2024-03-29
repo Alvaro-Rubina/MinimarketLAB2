@@ -348,7 +348,7 @@ public class Minimarket {
             }
         }
     }
-    
+
     // --------------------------------------------------------
     private double verificarIngresoValorNumerico(double eleccion){
 
