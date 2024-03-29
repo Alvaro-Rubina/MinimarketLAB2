@@ -9,6 +9,8 @@ public class Producto {
     private int stock;
     private int idProducto;
 
+    private int cantVecesVendido = 0;
+
     // Constructores
     public Producto() {
     }
@@ -60,5 +62,13 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getCantVecesVendido() {
+        return cantVecesVendido;
+    }
+
+    public void setCantVecesVendido(int cantVecesVendido) {
+        this.cantVecesVendido = cantVecesVendido;
     }
 }
