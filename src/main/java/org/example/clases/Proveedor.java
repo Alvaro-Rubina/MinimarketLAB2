@@ -5,5 +5,16 @@ import java.util.ArrayList;
 public class Proveedor extends Persona{
 
     // Atributos
-    ArrayList<Minimarket> listaNegociosClientes;
+    private ArrayList<Minimarket> listaNegociosClientes;
+    private double balance;
+
+    // Get set
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
