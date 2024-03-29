@@ -10,16 +10,44 @@ public class Minimarket {
     private Scanner scan = new Scanner(System.in);
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Empleado> listaEmpleados = new ArrayList<>();
-    private ArrayList<Proveedor> listaProveedores = new ArrayList<>();
+    private Proveedor proveedor = new Proveedor();
     private ArrayList<Cliente> listaClientes = new ArrayList<>();
 
-    // Get
+    private double balance = 0;
+    private double ganancias = 0;
+    private double pagos = 0;
+    private int cantidadVentas = 0;
+
+    // Get y set
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
 
+    public double getBalance() {
+        return balance;
+    }
 
-    // Metodos ------------------------
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getGanancias() {
+        return ganancias;
+    }
+
+    public void setGanancias(double ganancias) {
+        this.ganancias = ganancias;
+    }
+
+    public double getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(double pagos) {
+        this.pagos = pagos;
+    }
+
+    // Metodos ---------------------------------------------
     private void agregarProducto(){
         System.out.println("** ID del producto: ");
         int idProducto = 0;
@@ -177,6 +205,9 @@ public class Minimarket {
                 productoN.setStock(productoN.getStock() - cantidadVender);
                 System.out.println("Se han vendido " + cantidadVender + " unidades del producto " + productoN.getNombre());
                 System.out.println("Stock restante: " + productoN.getStock());
+                this.cantidadVentas += 1;
+                this.ganancias += productoN.getPrecio();
+                this.balance += productoN.getPrecio();
             }else {
                 System.out.println("No se encuentra registrado un producto con el ID dada.");
             }
@@ -184,7 +215,22 @@ public class Minimarket {
 
     }
 
-    // Menu de selección
+    private String pagarAlProveedor(){
+        System.out.print("Ingrese el monto que debe pagar al proveedor: ");
+        double montoPagar = 0;
+        montoPagar = this.verificarIngresoValorNumerico(montoPagar);
+
+        if (montoPagar <= this.balance){
+            proveedor.setBalance(proveedor.getBalance() + montoPagar);
+            this.balance -= montoPagar;
+            this.pagos += montoPagar;
+            return "Pago al proveedor realizado correctamente";
+        }else{
+            return "No hay suficientes fondos para realizar el pago al proveedor";
+        }
+    }
+
+    // Menu de selección --------------------------------------------------
     public void menuDeSeleccion(){
 
         int eleccion = 0;
@@ -238,16 +284,18 @@ public class Minimarket {
                     }
                     break;
                 case 3:
-                    //TODO: Implementacion logica para pagar al proveedor
+                    System.out.println(this.pagarAlProveedor());
                     break;
                 case 4:
-                    //TODO: Implementacion logica para consultar ventas
+                    System.out.println("Se ha realizado un total de " + this.cantidadVentas + " ventas");
                     break;
                 case 5:
-                    //TODO: Implementacion logica para consultar balance
+                    System.out.println("* Ganancias: " + this.ganancias);
+                    System.out.println("* Pagos: " + this.pagos);
+                    System.out.println("* BALANCE: " + this.balance);
                     break;
                 case 6:
-                    //TODO: Implementacion logica para solicitar comanda a la cocina
+                    //TODO: Implementacion logica para solicitar comanda a la cocina ?????????
                     break;
                 case 7:
                     //TODO: Implementacion logica para pagar cuenta
@@ -256,7 +304,7 @@ public class Minimarket {
                     //TODO: Implementacion logica para mostrar platos mas pedidos
                     break;
                 case 0:
-                    //TODO: Implementacion logica para salir
+                    System.out.println("Saliendo...");
                     break;
                 default:
                     System.out.println("La opcion que ha ingresado no está contemplada, intente nuevamente.");
