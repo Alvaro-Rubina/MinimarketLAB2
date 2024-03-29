@@ -272,6 +272,7 @@ public class Minimarket {
         System.out.println("0- Salir");
 
         // lógica
+        boolean salir = false;
         while (true) {
             eleccion = (int) this.verificarIngresoValorNumerico(eleccion);
             switch (eleccion) {
@@ -331,10 +332,14 @@ public class Minimarket {
                     break;
                 case 0:
                     System.out.println("Saliendo...");
+                    salir = true;
                     break;
                 default:
                     System.out.println("La opcion que ha ingresado no está contemplada, intente nuevamente.");
                     continue;
+            }
+            if (salir){
+                break;
             }
             System.out.print("\nDesea realizar otra operación? Ingrese SI o NO: ");
             boolean continuar = false;
